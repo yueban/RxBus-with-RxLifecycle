@@ -22,32 +22,28 @@ public class MainActivity extends BaseActivity {
         RxBus.postEventSticky(new CommonEvent(TAG + "_sticky"));
         RxBus.postEvent(new CommonEvent(TAG + "_normal"));
 
-        //noinspection ConstantConditions
-        findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, Activity2.class));
-            }
-        });
-
         mBusSticky
-            .ofType(CommonEvent.class)
-            //.compose(this.<CommonEvent>bindUntilEvent(ActivityEvent.PAUSE))
-            .subscribe(new Action1<CommonEvent>() {
-                @Override
-                public void call(CommonEvent commonEvent) {
-                    Log.i(TAG, commonEvent.message);
-                }
-            });
+                .ofType(CommonEvent.class)
+                //.compose(this.<CommonEvent>bindUntilEvent(ActivityEvent.PAUSE))
+                .subscribe(new Action1<CommonEvent>() {
+                    @Override
+                    public void call(CommonEvent commonEvent) {
+                        Log.i(TAG, commonEvent.message);
+                    }
+                });
 
         mBus
-            //.compose(bindUntilEvent(ActivityEvent.PAUSE))
-            .ofType(CommonEvent.class)
-            .subscribe(new Action1<CommonEvent>() {
-                @Override
-                public void call(CommonEvent commonEvent) {
-                    Log.i(TAG, commonEvent.message);
-                }
-            });
+                //.compose(bindUntilEvent(ActivityEvent.PAUSE))
+                .ofType(CommonEvent.class)
+                .subscribe(new Action1<CommonEvent>() {
+                    @Override
+                    public void call(CommonEvent commonEvent) {
+                        Log.i(TAG, commonEvent.message);
+                    }
+                });
+    }
+
+    public void onButtonClick(View view) {
+        startActivity(new Intent(MainActivity.this, Activity2.class));
     }
 }

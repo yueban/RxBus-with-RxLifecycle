@@ -22,33 +22,29 @@ public class Activity3 extends BaseActivity {
         RxBus.postEventSticky(new CommonEvent(TAG + "_sticky"));
         RxBus.postEvent(new CommonEvent(TAG + "_normal"));
 
-        //noinspection ConstantConditions
-        findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(Activity3.this, MainActivity.class).addFlags(
-                    Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP));
-            }
-        });
-
         mBusSticky
-            .ofType(CommonEvent.class)
-            .compose(this.<CommonEvent>bindToLifecycle())
-            .subscribe(new Action1<CommonEvent>() {
-                @Override
-                public void call(CommonEvent commonEvent) {
-                    Log.i(TAG, commonEvent.message);
-                }
-            });
+                .ofType(CommonEvent.class)
+                .compose(this.<CommonEvent>bindToLifecycle())
+                .subscribe(new Action1<CommonEvent>() {
+                    @Override
+                    public void call(CommonEvent commonEvent) {
+                        Log.i(TAG, commonEvent.message);
+                    }
+                });
 
         mBus
-            .ofType(CommonEvent.class)
-            .compose(this.<CommonEvent>bindToLifecycle())
-            .subscribe(new Action1<CommonEvent>() {
-                @Override
-                public void call(CommonEvent commonEvent) {
-                    Log.i(TAG, commonEvent.message);
-                }
-            });
+                .ofType(CommonEvent.class)
+                .compose(this.<CommonEvent>bindToLifecycle())
+                .subscribe(new Action1<CommonEvent>() {
+                    @Override
+                    public void call(CommonEvent commonEvent) {
+                        Log.i(TAG, commonEvent.message);
+                    }
+                });
+    }
+
+    public void onButtonClick(View view) {
+        startActivity(new Intent(Activity3.this, MainActivity.class).addFlags(
+                Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP));
     }
 }
