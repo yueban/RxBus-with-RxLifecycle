@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import com.trello.rxlifecycle.ActivityEvent;
+
 import bigfat.com.rxbusdemo.R;
 import bigfat.com.rxbusdemo.common.BaseActivity;
 import bigfat.com.rxbusdemo.event.CommonEvent;
@@ -24,7 +26,7 @@ public class MainActivity extends BaseActivity {
 
         mBusSticky
                 .ofType(CommonEvent.class)
-                //.compose(this.<CommonEvent>bindUntilEvent(ActivityEvent.PAUSE))
+                .compose(this.<CommonEvent>bindUntilEvent(ActivityEvent.PAUSE))
                 .subscribe(new Action1<CommonEvent>() {
                     @Override
                     public void call(CommonEvent commonEvent) {
@@ -33,7 +35,7 @@ public class MainActivity extends BaseActivity {
                 });
 
         mBus
-                //.compose(bindUntilEvent(ActivityEvent.PAUSE))
+                .compose(bindUntilEvent(ActivityEvent.PAUSE))
                 .ofType(CommonEvent.class)
                 .subscribe(new Action1<CommonEvent>() {
                     @Override

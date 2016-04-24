@@ -24,7 +24,6 @@ public class Activity3 extends BaseActivity {
 
         mBusSticky
                 .ofType(CommonEvent.class)
-                .compose(this.<CommonEvent>bindToLifecycle())
                 .subscribe(new Action1<CommonEvent>() {
                     @Override
                     public void call(CommonEvent commonEvent) {
@@ -34,7 +33,6 @@ public class Activity3 extends BaseActivity {
 
         mBus
                 .ofType(CommonEvent.class)
-                .compose(this.<CommonEvent>bindToLifecycle())
                 .subscribe(new Action1<CommonEvent>() {
                     @Override
                     public void call(CommonEvent commonEvent) {

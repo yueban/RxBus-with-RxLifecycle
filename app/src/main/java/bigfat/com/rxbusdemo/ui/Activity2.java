@@ -19,7 +19,7 @@ public class Activity2 extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_2);
 
-        //RxBus.postEventSticky(new CommonEvent(TAG + "_sticky"));
+        RxBus.postEventSticky(new CommonEvent(TAG + "_sticky"));
         RxBus.postEvent(new CommonEvent(TAG + "_normal"));
 
         mBusSticky
